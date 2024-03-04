@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hotel huamuchi</title>
+</head>
+<body>
+    <h1>Estancia en el Hotel Huamuchi</h1>
+
+    <label for="dias">Número de días de estancia:</label>
+    <input type="number" id="dias" placeholder="Ingrese el número de días" />
+
+    <br><br>
+
+    <label for="precioDiario">Precio diario de la habitación:</label>
+    <input type="number" id="precioDiario" placeholder="Ingrese el precio diario" />
+
+    <br><br>
+
+    <button onclick="calcularCosto()">Calcular Costo</button>
+
+    <br><br>
+
+    <h2>Detalles de la Estancia</h2>
+    <p>Subtotal: $<span id="subtotal"></span></p>
+    <p>Descuento: $<span id="descuento"></span></p>
+    <p>Total a pagar: $<span id="total"></span></p>
+    <script src="js/hotel.js"></script>
+</body>
+</html>
