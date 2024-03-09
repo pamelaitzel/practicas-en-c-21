@@ -1,0 +1,35 @@
+import requests
+
+def consultar_datos_rfc(api_key, rfc):
+    # Reemplaza la URL ficticia con la dirección real de la API
+    url = f'https://api.example.com/datos_rfc/{rfc}'
+    
+    # Configura los encabezados con la clave de API (si es necesario)
+    headers = {'Authorization': f'Bearer {api_key}'}  # Asegúrate de entender y seguir las políticas de autenticación
+
+    try:
+        # Realiza la solicitud GET a la API
+        response = requests.get(url, headers=headers)
+
+        # Maneja la respuesta de la API
+        if response.status_code == 200:
+            datos = response.json()
+            return datos
+        else:
+            print(f'Error al consultar la API: {response.status_code}')
+            return None
+
+    except Exception as e:
+        print(f'Error de conexión: {e}')
+        return None
+
+# Ejemplo de uso
+api_key = 'tu_clave_de_api'
+rfc_a_consultar = 'ABC123456XYZ'
+
+datos_persona = consultar_datos_rfc(api_key, rfc_a_consultar)
+
+if datos_persona:
+    print(f'Datos de la persona asociada al RFC {rfc_a_consultar}: {datos_persona}')
+else:
+    print('Consulta fallida.')
