@@ -1,0 +1,42 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+# Definir las constantes del circuito
+L = 20  # inductancia en henrios (H)
+R = 2   # resistencia en ohmios (Ω)
+E = 120 # fuerza electromotriz
+
+# Definir la función de la fuerza electromotriz
+def E_function(t):
+    if t <= 20:
+        return E
+    else:
+        return 0
+
+# Definir la ecuación diferencial para resolver
+def diff_eq(i, t):
+    return (E_function(t) - R * i) / L
+
+# Resolución de la ecuación diferencial para 0 <= t <= 20
+t_1 = np.linspace(0, 20, 1000)  # tiempo de 0 a 20 segundos
+i_0 = [0]  # condición inicial
+i_1 = odeint(diff_eq, i_0, t_1)[:,0]  # Resolver y convertir a 1D
+
+# Resolución de la ecuación diferencial para t > 20
+t_2 = np.linspace(20, 40, 1000)  # tiempo de 20 a 40 segundos
+i_2 = 60 * np.exp(2) * np.exp(-t_2 / 10)
+
+# Combinar las soluciones
+t_total = np.concatenate((t_1, t_2))
+i_total = np.concatenate((i_1, i_2))
+
+# Graficar
+plt.figure(figsize=(10, 6))
+plt.plot(t_total, i_total, label='Corriente (A)')
+plt.title('Corriente en el circuito LR en función del tiempo')
+plt.xlabel('Tiempo (s)')
+plt.ylabel('Corriente (A)')
+plt.grid(True)
+plt.legend()
+plt.show()
